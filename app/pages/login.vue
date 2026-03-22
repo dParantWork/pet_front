@@ -111,17 +111,17 @@ const toggleLanguage = () => {
 
         <!-- Main Form -->
         <form @submit.prevent="handleSubmit" class="space-y-4">
-          <div class="space-y-3 min-h-[260px] flex flex-col justify-start">
+          <div class="space-y-3 min-h-[170px] flex flex-col justify-start">
             
             <template v-if="mode === 'register'">
               <div class="flex gap-4">
                 <div class="relative flex-1">
                   <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="lastName">{{ t('last_name') }} <span class="text-red-500 ml-0.5">*</span></label>
-                  <UInput v-model="lastName" required id="lastName" placeholder="Dupont" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+                  <UInput v-model="lastName" required id="lastName" placeholder="Dupont" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
                 </div>
                 <div class="relative flex-1">
                   <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="firstName">{{ t('first_name') }} <span class="text-red-500 ml-0.5">*</span></label>
-                  <UInput v-model="firstName" required id="firstName" placeholder="Jean" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+                  <UInput v-model="firstName" required id="firstName" placeholder="Jean" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
                 </div>
               </div>
             </template>
@@ -130,8 +130,8 @@ const toggleLanguage = () => {
               <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="email">
                 {{ t('email') }} <span v-if="mode === 'register'" class="text-red-500 ml-0.5">*</span>
               </label>
-              <UInput v-if="mode === 'login'" v-model="email" required id="email" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
-              <UInput v-else v-model="registerEmail" required id="registerEmail" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-if="mode === 'login'" v-model="email" required id="email" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-else v-model="registerEmail" required id="registerEmail" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
             </div>
             
             <div class="relative">
@@ -141,8 +141,8 @@ const toggleLanguage = () => {
                 </label>
                 <a v-if="mode === 'login'" class="text-[10px] font-semibold text-primary-container hover:text-primary transition-colors" href="#">{{ t('forgot') }}</a>
               </div>
-              <UInput v-if="mode === 'login'" v-model="password" required id="password" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
-              <UInput v-else v-model="registerPassword" required id="registerPassword" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-if="mode === 'login'" v-model="password" required id="password" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-else v-model="registerPassword" required id="registerPassword" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-0 ring-0 outline-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
             </div>
           </div>
 
