@@ -3,6 +3,10 @@
     v-slot="{ open }"
     :modal="false"
     :items="[{
+      label: 'Connexion',
+      icon: 'i-lucide-log-in',
+      to: '/login'
+    }, {
       label: 'Starter',
       to: 'https://starter-template.nuxt.dev/',
       color: 'primary',
