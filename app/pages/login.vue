@@ -33,15 +33,21 @@ const toggleLanguage = () => {
 <template>
   <main class="flex min-h-screen relative">
     <!-- Language Switcher fixed to top-right corner -->
-    <div class="fixed top-4 right-6 z-50">
-      <UButton
-        variant="solid"
-        color="primary"
-        @click="toggleLanguage"
-        class="rounded-full shadow-lg font-bold px-4 py-2 transition-all hover:scale-105 bg-gradient-to-br from-primary to-primary-container text-white border-none shadow-primary/10 hover:shadow-primary/20"
-      >
-        {{ t('switch_lang') }}
-      </UButton>
+    <div class="fixed top-4 right-6 z-50 flex rounded-full overflow-hidden shadow-md border border-primary/30">
+      <button
+        @click="setLocale('fr')"
+        :class="[
+          'px-4 py-2 text-sm font-bold transition-all',
+          locale === 'fr' ? 'bg-gradient-to-br from-primary to-primary-container text-white' : 'bg-white text-primary hover:bg-surface-container-low'
+        ]"
+      >FR</button>
+      <button
+        @click="setLocale('en')"
+        :class="[
+          'px-4 py-2 text-sm font-bold transition-all',
+          locale === 'en' ? 'bg-gradient-to-br from-primary to-primary-container text-white' : 'bg-white text-primary hover:bg-surface-container-low'
+        ]"
+      >EN</button>
     </div>
 
     <!-- Left Section: Visual & Editorial Narrative -->
@@ -110,29 +116,33 @@ const toggleLanguage = () => {
             <template v-if="mode === 'register'">
               <div class="flex gap-4">
                 <div class="relative flex-1">
-                  <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="lastName">{{ t('last_name') }}</label>
-                  <UInput v-model="lastName" required id="lastName" placeholder="Dupont" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+                  <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="lastName">{{ t('last_name') }} <span class="text-red-500 ml-0.5">*</span></label>
+                  <UInput v-model="lastName" required id="lastName" placeholder="Dupont" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
                 </div>
                 <div class="relative flex-1">
-                  <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="firstName">{{ t('first_name') }}</label>
-                  <UInput v-model="firstName" required id="firstName" placeholder="Jean" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+                  <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="firstName">{{ t('first_name') }} <span class="text-red-500 ml-0.5">*</span></label>
+                  <UInput v-model="firstName" required id="firstName" placeholder="Jean" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
                 </div>
               </div>
             </template>
 
             <div class="relative">
-              <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="email">{{ t('email') }}</label>
-              <UInput v-if="mode === 'login'" v-model="email" required id="email" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
-              <UInput v-else v-model="registerEmail" required id="registerEmail" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1 ml-4" for="email">
+                {{ t('email') }} <span v-if="mode === 'register'" class="text-red-500 ml-0.5">*</span>
+              </label>
+              <UInput v-if="mode === 'login'" v-model="email" required id="email" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-else v-model="registerEmail" required id="registerEmail" icon="i-heroicons-envelope" placeholder="hello@sanctuary.com" type="email" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
             </div>
             
             <div class="relative">
               <div class="flex justify-between items-center mb-1 ml-4 mr-4">
-                <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant" for="password">{{ t('password') }}</label>
+                <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant" for="password">
+                  {{ t('password') }} <span v-if="mode === 'register'" class="text-red-500 ml-0.5">*</span>
+                </label>
                 <a v-if="mode === 'login'" class="text-[10px] font-semibold text-primary-container hover:text-primary transition-colors" href="#">{{ t('forgot') }}</a>
               </div>
-              <UInput v-if="mode === 'login'" v-model="password" required id="password" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
-              <UInput v-else v-model="registerPassword" required id="registerPassword" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-if="mode === 'login'" v-model="password" required id="password" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
+              <UInput v-else v-model="registerPassword" required id="registerPassword" icon="i-heroicons-lock-closed" placeholder="••••••••" type="password" size="lg" :ui="{ rounded: 'rounded-full', base: 'bg-surface-container-high border-none focus:ring-2 focus:ring-primary/20 text-black', padding: { lg: 'px-5 py-3' } }" class="w-full shadow-none" />
             </div>
           </div>
 
