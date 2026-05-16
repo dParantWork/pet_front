@@ -58,7 +58,7 @@ const settingsItems = computed(() => [
   [{
     label: t('dash_logout'),
     icon: 'i-lucide-log-out',
-    onSelect: () => navigateTo('/login')
+    onSelect: () => navigateTo('/')
   }]
 ])
 </script>
@@ -272,7 +272,9 @@ const settingsItems = computed(() => [
 
       <!-- BottomNavBar (Mobile) -->
       <nav class="fixed bottom-0 left-0 right-0 bg-surface md:hidden flex justify-around py-4 z-50 shadow-[0_-4px_24px_rgba(27,28,25,0.04)]">
-        <UButton v-for="item in navItems" :key="item.label"
+        <UButton
+          v-for="item in navItems"
+          :key="item.label"
           :to="item.to"
           :icon="item.icon"
           :label="item.label"
